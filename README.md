@@ -1,4 +1,4 @@
-# The Family Album API
+# The Fitness API
 
 ## Installation
 
