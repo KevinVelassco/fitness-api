@@ -36,9 +36,9 @@ async function bootstrap() {
   app.setViewEngine('hbs');
 
   const config = new DocumentBuilder()
-    .setTitle('Family Album API')
+    .setTitle('Fitness API')
     .setDescription(
-      'This documentation will help you get familiar with the resources of the Family Album API and show you how to make different queries, so that you can get the most out of it.',
+      'This documentation will help you get familiar with the resources of the Fitness API and show you how to make different queries, so that you can get the most out of it.',
     )
     .setVersion('1.0')
     .build();
