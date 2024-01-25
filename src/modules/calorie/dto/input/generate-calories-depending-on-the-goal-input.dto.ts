@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsInt, IsNotEmpty, IsNumber, Max, Min } from 'class-validator';
+import {
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  Max,
+  Min,
+} from 'class-validator';
 
 export enum Gender {
   MAN = 'Man',
@@ -15,6 +23,7 @@ export enum GoalType {
 export class GenerateCaloriesDependingOnTheGoalInput {
   @ApiProperty({ example: 60 })
   @IsNumber()
+  @IsPositive()
   readonly weightInKg: number;
 
   @ApiProperty({ enum: Gender })
