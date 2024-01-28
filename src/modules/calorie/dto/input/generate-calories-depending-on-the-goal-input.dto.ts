@@ -4,6 +4,7 @@ import {
   IsInt,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsPositive,
   Max,
   Min,
@@ -37,6 +38,7 @@ export class GenerateCaloriesDependingOnTheGoalInput {
   readonly goalType: GoalType;
 
   @ApiProperty({ example: 10, minimum: 10, maximum: 30 })
+  @IsOptional()
   @Min(10)
   @Max(30)
   @IsInt()

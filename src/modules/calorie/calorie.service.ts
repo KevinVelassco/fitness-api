@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import {
   CalculateCaloriesFromCarbohydrateInput,
   CalculateCaloriesFromFatInput,
@@ -30,6 +30,10 @@ export class CalorieService {
       gramOfFatPerKgOfWeight,
     } = generateCaloriesDependingOnTheGoalInput;
 
+    if (goalType !== GoalType.MAINTENANCE_CALORIES && !caloriePercentageValue) {
+      throw new BadRequestException('percentage required');
+    }
+
     const normocaloricCalories = this.generateNormocaloricCalories({
       weightInKg,
       gender,
@@ -37,15 +41,16 @@ export class CalorieService {
 
     let totalCalories = normocaloricCalories;
 
-    const amountOfCalories =
-      (normocaloricCalories * caloriePercentageValue) / 100;
-
     switch (goalType) {
       case GoalType.CALORIC_SURPLUS:
-        totalCalories = normocaloricCalories + amountOfCalories;
+        totalCalories =
+          normocaloricCalories +
+          (normocaloricCalories * caloriePercentageValue) / 100;
         break;
       case GoalType.CALORIE_DEFICIT:
-        totalCalories = normocaloricCalories - amountOfCalories;
+        totalCalories =
+          normocaloricCalories -
+          (normocaloricCalories * caloriePercentageValue) / 100;
         break;
     }
 
